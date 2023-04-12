@@ -43,6 +43,10 @@ function App() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if(firstName === '' || lastName === '' || email === '' || selectedCar === '' || currentDate === ''){
+      setMessage('Please provide missing Informations')
+    }
+
     axios.post('https://acc-test-vjn7.onrender.com/form', data, { headers })
       .then(response => {
         console.log(response);
