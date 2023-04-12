@@ -1,5 +1,6 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
 
@@ -24,6 +25,18 @@ function App() {
   const handleCar = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCar(e.target.value);
   };
+
+
+  useEffect(() => {
+    axios.get('https://randomuser.me/api/')
+      .then(response => {
+        const user = response.data.results[0];
+        setFirstName(user.name.first);
+        setLastName(user.name.last);
+        setEmail(user.email);
+      })
+      .catch(error => console.log(error));
+  }, []);
 
 
 
