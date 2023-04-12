@@ -7,8 +7,9 @@ function App() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [selectedCar, setSelectedCar] = useState('-');
+  const [selectedCar, setSelectedCar] = useState('');
   const [currentDate, setCurrentDate] = useState(new Date().toISOString().substring(0, 10));
+  const [message, setMessage] = useState<string>('');
 
   const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value);
@@ -45,6 +46,7 @@ function App() {
     axios.post('https://acc-test-vjn7.onrender.com/form', data, { headers })
       .then(response => {
         console.log(response);
+        setMessage('Form submitted successfully!');
       })
       .catch(error => console.log(error));
   };
@@ -86,7 +88,7 @@ function App() {
       <label>
         Choose a Car:
         <select value={selectedCar} onChange={handleCar}>
-          <option value="-">-Choose a Car-</option>
+          <option value="">-Choose a Car-</option>
           <option value="Golf">Golf</option>
           <option value="Atreon">Atreon</option>
           <option value="Tiguan">Tiguan</option>
@@ -101,6 +103,7 @@ function App() {
       <button type="submit">Submit</button>
     </form>
 
+    <p>{ message }</p>
 
       </header>
     </div>
